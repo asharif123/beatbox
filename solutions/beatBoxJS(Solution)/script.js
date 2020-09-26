@@ -1,3 +1,4 @@
+// each key has 2 properties: beat having unique sound and color that gets activated
 let beats = {
     "65": {
         beat: new Beat("./assets/Piano Chord 331.mp3"),
@@ -17,7 +18,7 @@ let beats = {
     },
     "71": {
         beat: new Beat("./assets/Drum Snare Roll.mp3"),
-        button: new Button("#FF00FF", 71)
+        button: new Button("white", 71)
     },
     "72": {
         beat: new Beat("./assets/PREL Musical 57.mp3"),
@@ -37,12 +38,20 @@ let beats = {
     }
 }
 
+// lay audio when a key is clicked!
+// run this function when a key is pressed!
+// call select function here upon key press!
 triggerBeat = (event) => {
-    let code = event.keyCode;
-    if(code in beats){
-        beats[code].button.select();
-        beats[code].beat.play();
+    const keyCode = event.keyCode;
+    // see if keyCode is inside beats object
+    if (keyCode in beats) {
+        let keyPress = beats[keyCode];
+        keyPress.beat.play()
+        keyPress.button.select()
+        // keyPress.button.deselect()
+
     }
 }
 
-document.addEventListener("keydown", triggerBeat);
+// keyDown listener to trigger triggerBeat function when key is selected and listen on actual keypresses to trigger certain function
+document.addEventListener('keydown', triggerBeat)
